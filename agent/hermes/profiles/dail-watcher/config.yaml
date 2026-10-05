@@ -1,0 +1,55 @@
+# Versioned dail-watcher profile configuration.
+#
+# This file is copied into the profile's private Hermes home during deployment.
+# API_SERVER_* and DAILDEX_AGENT_TOKEN stay in /etc/daildex/hermes.env; no
+# credentials belong here.
+
+# These are deliberately supplied by /etc/daildex/hermes.env so the deployment
+# pins one explicit provider/model without putting provider credentials in git.
+model:
+  provider: "${HERMES_MODEL_PROVIDER}"
+  default: "${HERMES_MODEL}"
+  # OpenRouter attributes usage to this site instead of Hermes' own default.
+  default_headers:
+    HTTP-Referer: "https://daildex.com"
+    X-Title: "DailDex Hermes"
+
+# No cross-provider failover for public alert text. If this list is ever made
+# non-empty, the worker's provider/model allowlists must be updated and the
+# paid-model eval must be rerun first.
+fallback_providers: []
+
+# The alert worker is intentionally single-flight. Postgres owns the queue;
+# Hermes should not create its own concurrent work stream.
+gateway:
+  # This VPS intentionally runs one isolated profile. Current Hermes versions
+  # otherwise require a host-level multiplex gateway for named profiles.
+  standalone: true
+  api_server:
+    max_concurrent_runs: 1
+
+# The first production cut is deliberately tool-less. The capability check in
+# the alert worker must report zero enabled tools before HERMES_ALERTS_ENABLED
+# is enabled.
+platform_toolsets:
+  api_server: []
+
+# MCP stays off until an alert worker calls these tools. The server lives in
+# apps/mcp. Hermes names discovered tools mcp_daildex_*. To enable it, uncomment
+# both blocks and set HERMES_DRAFT_MODE=mcp_tool.
+#
+# mcp_servers:
+#   daildex:
+#     command: "/usr/bin/npm"
+#     args: ["run", "start", "--workspace", "@daildex/mcp"]
+#     env:
+#       DAILDEX_INTERNAL_API_URL: "${DAILDEX_INTERNAL_API_URL}"
+#       DAILDEX_AGENT_TOKEN: "${DAILDEX_AGENT_TOKEN}"
+#     timeout: 30
+#     connect_timeout: 30
+#     sampling:
+#       enabled: false
+#
+# platform_toolsets:
+#   api_server:
+#     - mcp-daildex

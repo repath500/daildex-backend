@@ -1,0 +1,28 @@
+{
+  "name": "@daildex/ingest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "members": "tsx --env-file-if-exists=../../.env.local src/cli.ts members",
+    "votes": "tsx --env-file-if-exists=../../.env.local src/cli.ts votes",
+    "questions": "tsx --env-file-if-exists=../../.env.local src/cli.ts questions",
+    "debates": "tsx --env-file-if-exists=../../.env.local src/cli.ts debates",
+    "legislation": "tsx --env-file-if-exists=../../.env.local src/cli.ts legislation",
+    "backfill": "tsx --env-file-if-exists=../../.env.local src/cli.ts backfill",
+    "policy": "tsx --env-file-if-exists=../../.env.local src/cli.ts policy",
+    "lint": "eslint src",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@daildex/db": "*",
+    "@daildex/shared": "*",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.20.6",
+    "typescript": "^5"
+  },
+  "license": "MIT"
+}

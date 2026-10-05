@@ -1,0 +1,48 @@
+name: Backend checks
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: daildex
+          POSTGRES_PASSWORD: local-development-only
+          POSTGRES_DB: daildex_test
+        ports: ["55432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U daildex -d daildex_test"
+          --health-interval 2s --health-timeout 3s --health-retries 20
+    env:
+      DATABASE_URL: postgresql://daildex:local-development-only@127.0.0.1:55432/daildex_test
+      MIGRATION_DATABASE_URL: postgresql://daildex:local-development-only@127.0.0.1:55432/daildex_test
+      PUBLIC_API_TEST_DATABASE_URL: postgresql://daildex:local-development-only@127.0.0.1:55432/daildex_test
+      EDITORIAL_TEST_DATABASE_URL: postgresql://daildex:local-development-only@127.0.0.1:55432/daildex_test
+      BUDGET_TEST_DATABASE_URL: postgresql://daildex:local-development-only@127.0.0.1:55432/daildex_test
+      APP_BASE_URL: http://localhost:3000
+      TOKEN_HASH_PEPPER: integration-test-pepper-that-is-not-production
+      EMAIL_REPLY_DOMAIN: reply.example.test
+      RESEND_WEBHOOK_SECRET: whsec_dGVzdC1yZXNlbmQtd2ViaG9vay1zZWNyZXQ=
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run verify
+      - run: npm run db:migrate
+      - run: npm run db:check
+      - run: npm run test:db
+      - name: Check API startup against the migrated local database
+        shell: bash
+        run: |
+          npm start > /tmp/daildex-api.log 2>&1 &
+          api_pid=$!
+          trap 'kill "$api_pid" 2>/dev/null || true' EXIT
+          curl --retry 20 --retry-delay 1 --retry-connrefused --fail http://127.0.0.1:8787/health/ready
+          curl --fail 'http://127.0.0.1:8787/v1/representatives?limit=5'

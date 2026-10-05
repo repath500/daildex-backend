@@ -1,0 +1,29 @@
+{
+  "name": "@daildex/shared",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./subscriptions": "./src/subscriptions.ts",
+    "./taxonomy": "./src/taxonomy.ts",
+    "./editorial-benchmark": "./src/editorial-benchmark.ts",
+    "./languages": "./src/languages.ts",
+    "./launch-week": "./src/launch-week.ts",
+    "./student-deal": "./src/student-deal.ts",
+    "./budget-live": "./src/budget-live.ts",
+    "./openrouter": "./src/openrouter.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  },
+  "license": "MIT"
+}

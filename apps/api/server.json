@@ -1,0 +1,26 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.daildex/oireachtas",
+  "title": "DáilDex — Oireachtas record",
+  "description": "Read-only access to the Irish parliamentary record: Dáil votes, parliamentary questions with answers, debate contributions and bills, each with an oireachtas.ie source link.",
+  "version": "1.0.0-beta",
+  "websiteUrl": "https://daildex.com/developers",
+  "repository": {
+    "url": "https://github.com/repath500/daildex-backend",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.daildex.com/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional. `Bearer dd_live_...` — a free API key from https://daildex.com/developers/keys raises the rate limit.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

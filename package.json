@@ -1,0 +1,57 @@
+{
+  "name": "daildex-backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Open source backend for D\u00e1ilDex: Oireachtas ingestion, civic alerts, REST API and MCP.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/repath500/daildex-backend.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @daildex/api",
+    "start": "tsx --env-file-if-exists=.env.local apps/api/src/server.ts",
+    "setup:local": "node scripts/setup-local.mjs",
+    "db:migrate": "npm run migrate --workspace @daildex/db",
+    "db:check": "npm run check --workspace @daildex/db",
+    "lint": "eslint apps packages scripts --no-warn-ignored",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:db": "vitest run --config vitest.integration.config.ts --no-file-parallelism",
+    "secrets:scan": "node scripts/secret-scan.mjs",
+    "verify": "npm run secrets:scan && npm run lint && npm run typecheck && npm test",
+    "ingest:members": "npm run members --workspace @daildex/ingest",
+    "ingest:votes": "npm run votes --workspace @daildex/ingest",
+    "ingest:questions": "npm run questions --workspace @daildex/ingest",
+    "ingest:debates": "npm run debates --workspace @daildex/ingest",
+    "ingest:legislation": "npm run legislation --workspace @daildex/ingest",
+    "ingest:backfill": "npm run backfill --workspace @daildex/ingest",
+    "ingest:policy": "npm run policy --workspace @daildex/ingest",
+    "worker:email": "npm run email --workspace @daildex/worker",
+    "worker:alert": "npm run alert --workspace @daildex/worker",
+    "worker:publish": "npm run alert-publish --workspace @daildex/worker",
+    "worker:webhook": "npm run webhook --workspace @daildex/worker",
+    "worker:reply": "npm run reply --workspace @daildex/worker",
+    "worker:retention": "npm run retention --workspace @daildex/worker",
+    "worker:reconcile-email": "npm run reconcile-email --workspace @daildex/worker",
+    "worker:api-webhooks": "npm run api-webhooks --workspace @daildex/worker",
+    "worker:editorial": "npm run editorial --workspace @daildex/worker",
+    "worker:budget-live": "npm run budget-live --workspace @daildex/worker"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "eslint": "^9",
+    "tsx": "^4.20.6",
+    "typescript": "^5",
+    "typescript-eslint": "^8.62.1",
+    "vitest": "^3.2.4"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "@daildex/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "email": "tsx --env-file-if-exists=../../.env.local src/email-worker.ts",
+    "alert": "tsx --env-file-if-exists=../../.env.local src/alert-worker.ts",
+    "alert-publish": "tsx --env-file-if-exists=../../.env.local src/publish-worker.ts",
+    "webhook": "tsx --env-file-if-exists=../../.env.local src/webhook-worker.ts",
+    "reply": "tsx --env-file-if-exists=../../.env.local src/reply-worker.ts",
+    "api-webhooks": "tsx --env-file-if-exists=../../.env.local src/api-webhook-worker.ts",
+    "retention": "tsx --env-file-if-exists=../../.env.local src/retention-worker.ts",
+    "reconcile-email": "tsx --env-file-if-exists=../../.env.local src/reconcile-email-worker.ts",
+    "editorial": "tsx --env-file-if-exists=../../.env.local src/editorial-worker.ts",
+    "budget-live": "tsx --env-file-if-exists=../../.env.local src/budget-live-worker.ts",
+    "indexnow-budget": "tsx --env-file-if-exists=../../.env.local src/indexnow-budget.ts",
+    "announce:pro-week": "tsx --env-file-if-exists=../../.env.local src/launch-week-send.ts",
+    "announce:showcase": "tsx --env-file-if-exists=../../.env.local src/showcase-send.ts",
+    "announce": "tsx --env-file-if-exists=../../.env.local src/announcement-send.ts",
+    "td-outreach": "tsx --env-file-if-exists=../../.env.local src/td-outreach-send.ts",
+    "lint": "eslint src",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@daildex/core": "*",
+    "@daildex/db": "*",
+    "@daildex/shared": "*",
+    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "ai": "^7.0.15",
+    "zod": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "tsx": "^4.20.6",
+    "typescript": "^5"
+  },
+  "license": "MIT"
+}

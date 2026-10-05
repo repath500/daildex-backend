@@ -1,0 +1,54 @@
+{
+  "name": "@daildex/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./alerts": "./src/alerts/service.ts",
+    "./subscriptions": "./src/subscriptions/service.ts",
+    "./email": "./src/email/index.ts",
+    "./email/webhooks": "./src/email/provider-webhooks.ts",
+    "./review": "./src/review/service.ts",
+    "./replies": "./src/replies/service.ts",
+    "./privacy": "./src/privacy/service.ts",
+    "./rate-limit": "./src/security/rate-limit.ts",
+    "./operations": "./src/operations/service.ts",
+    "./public-api": "./src/public-api/service.ts",
+    "./public-api/keys": "./src/public-api/keys.ts",
+    "./public-api/webhooks": "./src/public-api/webhooks.ts",
+    "./public-api/rate-limit": "./src/public-api/rate-limit.ts",
+    "./public-api/openapi": "./src/public-api/openapi.ts",
+    "./public-api/test-fixtures": "./src/public-api/test-fixtures.ts",
+    "./chat": "./src/chat/service.ts",
+    "./chat/uploads": "./src/chat/uploads.ts",
+    "./chat/student-deal": "./src/chat/student-deal.ts",
+    "./chat/shared-tests": "./src/chat/shared-tests.ts",
+    "./study": "./src/study/service.ts",
+    "./study/offer": "./src/study/offer.ts",
+    "./study/classes": "./src/study/classes.ts",
+    "./agent": "./src/agent/service.ts",
+    "./agent/scope": "./src/agent/scope.ts",
+    "./official-data": "./src/official-data/service.ts",
+    "./editorial": "./src/editorial/service.ts",
+    "./editorial/parliamentary": "./src/editorial/parliamentary.ts",
+    "./oireachtas": "./src/oireachtas/index.ts",
+    "./td-office": "./src/td-office/service.ts",
+    "./budget": "./src/budget/service.ts"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@daildex/db": "*",
+    "@daildex/shared": "*",
+    "parse5": "^7.3.0",
+    "svix": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "typescript": "^5"
+  },
+  "license": "MIT"
+}
