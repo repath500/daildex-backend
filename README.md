@@ -57,7 +57,7 @@ In another terminal:
 
 ```bash
 curl http://127.0.0.1:8787/health/ready
-curl 'http://127.0.0.1:8787/v1/representatives?limit=5'
+curl 'http://127.0.0.1:8787/v1/representatives'
 ```
 
 Open [the local API reference](http://127.0.0.1:8787/docs) or

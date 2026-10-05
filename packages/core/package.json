@@ -47,7 +47,7 @@
     "svix": "^2.5.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "typescript": "^5"
   },
   "license": "MIT"

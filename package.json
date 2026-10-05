@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Open source backend for D\u00e1ilDex: Oireachtas ingestion, civic alerts, REST API and MCP.",
+  "description": "Open source backend for DáilDex: Oireachtas ingestion, civic alerts, REST API and MCP.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -47,11 +47,11 @@
     "worker:budget-live": "npm run budget-live --workspace @daildex/worker"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^22",
     "eslint": "^9",
     "tsx": "^4.20.6",
     "typescript": "^5",
     "typescript-eslint": "^8.62.1",
-    "vitest": "^3.2.4"
+    "vitest": "^5.0.3"
   }
 }

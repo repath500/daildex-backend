@@ -45,4 +45,4 @@ jobs:
           api_pid=$!
           trap 'kill "$api_pid" 2>/dev/null || true' EXIT
           curl --retry 20 --retry-delay 1 --retry-connrefused --fail http://127.0.0.1:8787/health/ready
-          curl --fail 'http://127.0.0.1:8787/v1/representatives?limit=5'
+          curl --fail 'http://127.0.0.1:8787/v1/representatives'
